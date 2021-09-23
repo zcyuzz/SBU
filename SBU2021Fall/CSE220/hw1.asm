@@ -27,12 +27,27 @@ hw_main:
     j start_coding_here
 
 start_coding_here:
-    li $t9,2 #check amount of arguments
-    bne $a0,$t9,print_args_err_msg 
-    beqz
-    j exit
+ 	li $t9,2 #check amount of arguments
+ 	bne $a0,$t9,print_args_err_msg 
+	jal strlen
+	
+	move $a0,$v0
+	li $v0,1
+	syscall
+	
+	
+	j exit
 
-
+strlen:
+	li $v0,0
+	lw $t9,arg1_addr
+strlen_helper:
+	lbu $t0,0($t9)
+	addi $t9,$t9,1
+	addi $v0,$v0,1
+	bne $t0,$zero,strlen_helper
+	j jump_back
+	
 print_args_err_msg:
 	la $a0,args_err_msg
 	li $v0,4
