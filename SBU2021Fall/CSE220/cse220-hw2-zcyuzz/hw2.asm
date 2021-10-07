@@ -161,18 +161,17 @@ encrypt_key:
 	li $t8,0
 	j encrypt_key_index
 	jr $ra
+
 encrypt_key_space:
 	sb $t1,0($a2)
 	addi $a2,$a2,1
 	j encrypt_key
+
 print:
 	sub $a2,$a2,$t9
-	move $a0,$a2
-	li $v0,4
-	syscall
-	
 	li $v0,1
 	jr $ra
+
 encrypt_key_index:
 	lb $t2,0($a1)
 	beq $t2,$t1,encrypt_odd
