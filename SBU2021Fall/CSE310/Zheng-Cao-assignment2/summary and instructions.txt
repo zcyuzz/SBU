@@ -1,0 +1,18 @@
+Used library: dpkt
+
+How to run: open command line and enter "python analysis_pcap_tcp -f your_filename"
+
+
+Part A
+
+1.	The number of TCP flows initiated from the sender can be calculated by traversing tcp packets containing both SYN and ACK.
+2.
+	A)	source port, source IP address, destination port, destination IP address are all in tcp header.
+	B)	For the first two transaction, I record packet with FIN, after two packets with FIN, we can print Sequence number, Ack number, and Receive Window size of packet.
+	C)	For the sender throughput, I record the start and end time of the entire communication process, calculate the time interval, and accumulate the data size of each tcp packet, and then divide the time interval by the total data size.
+
+Part B
+1.	every rtt I multiply the size by 2.
+
+2.	I use a collection to record the ack value we read. If we find an ack that already exists in the collection, it means that a retransmission has occurred.
+
