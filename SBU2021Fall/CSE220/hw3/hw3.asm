@@ -40,9 +40,7 @@ ini_helper1:
     addi $t1,$t1,-4
     sw $t7,0($sp)
     
-    li $v0,1
     move $a0,$t7
-    syscall
     
     j ini_helper1	
     
@@ -80,9 +78,8 @@ copy_to_buffer:
     addi $t9,$t9,-4
     addi $sp,$sp,4
 
-    li $v0,1
     move $a0,$t7
-    syscall
+
     j copy_to_buffer
       
 .globl write_file
@@ -423,12 +420,16 @@ mirror_write:
 .globl duplicate
 duplicate:
     move $t6,$ra
-    jal initialize
     move $ra,$t6
     li $v0,-1
     li $v1,0
     jr $ra
-
+dplct:
+	lw $t1,0($a0)
+	li $v0,1
+	move $a0,$t1
+	syscall
+	jr $ra	
 return:
     move $a0,$t8
     li $v0,16

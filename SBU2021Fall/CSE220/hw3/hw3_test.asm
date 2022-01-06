@@ -3,19 +3,20 @@
 # Change data section as you deem fit.
 # Change filepath if necessary.
 .data
-Filename: .asciiz "inputs/input6.txt"
+Filename: .asciiz "inputs/dup1p.txt"
 OutFile: .asciiz "out.txt"
 Buffer:
-    .word 7	# num rows
-    .word 2	# num columns
+    .word 0	# num rows
+    .word 0	# num columns
     # matrix
-    .word   1 2 4 5 9 3 3 7 3 8 2 2 1 9 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    .word   0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 
 
 .text
 main:
- la $a0, Buffer
- la $a1, OutFile
+ la $a0, Filename
+ la $a1, Buffer
+ jal initialize
 
  
  #li $v0,13
@@ -38,7 +39,8 @@ main:
 # li $v0,16
 # move $a0,$s0
 # syscall
- jal rotate_clkws_270
+la $a0,Buffer
+ jal dplct
 
  # write additional test code as you deem fit.
 

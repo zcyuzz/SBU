@@ -110,6 +110,7 @@ pair_exists:
 	move $t2,$a1
 	beq $t1,$t2,pair_exists_failed
 	li $v0,1
+	
 pair_exists_loop:
 	lb $t3,0($a2)
 	li $t0,65
@@ -190,6 +191,7 @@ encrypt_odd:
 	sub $a1,$a1,$t8
 	li $t8,0
 	j encrypt_key
+	
 encrypt_even:
 	addi $a1,$a1,1
 	lb $t1,0($a1)
@@ -232,6 +234,7 @@ encrypt_to_upper:
 	addi $a0,$a0,1
 	addi $t9,$t9,1
 	j encrypt_to_upper	 
+	
 encrypt_upper:
 	addi $t1,$t1,-32
 	sb $t1,0($a0)
@@ -254,12 +257,14 @@ decipher_key_with_chosen_plaintext:
  	beqz $t1,addNull
  	move $t6,$t5
  	j not_contains
+ 	
  not_contains:
  	lb $t3,0($t6)
  	beq $t3,$0,append
  	addi $t6,$t6,1	
  	beq $t3,$t1,decipher_helper
  	j not_contains
+ 	
  append:
  	sb $t1,0($a2)
  	sb $t2,1($a2)
@@ -269,5 +274,6 @@ decipher_key_with_chosen_plaintext:
  addNull:
 	sb $0,0($a2)
 	jr $ra 	
+	
  jump_back:
  	jr $ra
